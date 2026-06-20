@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Separador de remitos PDF</title>
+    <link rel="stylesheet" href="/static/styles.css">
+  </head>
+  <body>
+    <header class="brand-bar">
+      <div class="brand-inner">
+        <img class="veladero-logo" src="/static/logo.png" alt="Veladero">
+      </div>
+    </header>
+
+    <main class="hero-band">
+      <div class="page">
+      <section class="panel">
+        <div class="panel-header">
+          <span class="eyebrow">Veladero PDF</span>
+          <h1>Separador de remitos PDF</h1>
+        </div>
+
+        {% if error %}
+          <div class="error">
+            <strong>No se pudo procesar el PDF</strong>
+            <p>{{ error }}</p>
+          </div>
+        {% endif %}
+
+        {% if missing_dependencies %}
+          <div class="alert">
+            <strong>Faltan dependencias del sistema</strong>
+            <p>
+              Instala Poppler y Tesseract. Si ya los instalaste, reinicia la terminal
+              donde ejecutaste Uvicorn para que tome el PATH actualizado.
+            </p>
+            <ul>
+              {% for dependency in missing_dependencies %}
+                <li>{{ dependency.command }}: {{ dependency.detail }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        <form action="/process" method="post" enctype="multipart/form-data" class="upload-form">
+          <div class="mode-zone">
+            <label for="processing_mode">Modo de separacion</label>
+            <select id="processing_mode" name="processing_mode">
+              <option value="standard" selected>Separacion actual por remito</option>
+              <option value="veladero_blocks">Separar por bloques Veladero</option>
+            </select>
+          </div>
+          <div class="file-zone">
+            <label for="file">PDF de remitos</label>
+            <input id="file" name="file" type="file" accept="application/pdf" required>
+          </div>
+          <button type="submit">Procesar y descargar ZIP</button>
+        </form>
+
+        <div class="notes">
+          <strong>Campos usados:</strong>
+          <span>Pagina actual/total</span>
+          <span>Documento de compras</span>
+          <span>Entrega entrante</span>
+          <span>Identificacion externa</span>
+        </div>
+      </section>
+      </div>
+    </main>
+  </body>
+</html>

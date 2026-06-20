@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.pdf
+*.zip
+*.log
+uploads/*
+outputs/*
+!uploads/.gitkeep
+!outputs/.gitkeep
+tools/poppler/
