@@ -10,8 +10,8 @@ No usa APIs externas.
 
 Configuracion prevista:
 
-- Repositorio GitHub: `pdf-remitos-controlados`
-- Visibilidad: privado
+- Repositorio GitHub: `pdf-remitos-controlados-v2`
+- Visibilidad: publico
 - Deploy: Easypanel con Docker
 - Puerto interno: `8000`
 - Comando de arranque:
